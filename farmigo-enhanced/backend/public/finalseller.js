@@ -1,4 +1,4 @@
-const API = 'http://localhost:5000';
+const API = 'https://farmigo-backend-5w4i.onrender.com';
 const socket = io(API);
 
 let currentUser = null;
