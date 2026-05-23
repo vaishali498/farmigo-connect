@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Search Results</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    .navbar {
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px 20px;
+    }
+
+    .navbar h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    #resultHeading {
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    .product-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .product-card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      width: 300px;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .product-card:hover {
+      transform: scale(1.02);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .product-card .info {
+      padding: 15px;
+    }
+
+    .product-card h3 {
+      margin: 0 0 10px;
+      color: #333;
+    }
+
+    .product-card p {
+      margin: 5px 0;
+      font-size: 14px;
+      color: #555;
+    }
+
+    /* Loading style */
+    .loading {
+      font-size: 18px;
+      color: #333;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .modal {
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 400px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.close {
+  position: absolute;
+  top: 10px; right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <h1>Search Results</h1>
+  </nav>
+
+  <div class="container">
+    <h2 id="resultHeading">Searching...</h2>
+    <div id="resultContainer" class="product-grid"></div>
+    <div id="loading" class="loading">Loading products...</div>
+  </div>
+
+  <!-- Modal -->
+<div id="productModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span id="closeModal" class="close">&times;</span>
+    <div id="modalBody"></div>
+    <button id="addToCartBtn">Add to Cart</button>
+  </div>
+</div>
+
+
+  <script>
+    // Get the query parameter from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const query = urlParams.get('query')?.toLowerCase();
+    const container = document.getElementById('resultContainer');
+    const heading = document.getElementById('resultHeading');
+    const loading = document.getElementById('loading');
+  
+    // Fetch and display products based on search query
+    let products = [];
+    async function fetchAndDisplayProducts() {
+  if (!query) {
+    heading.textContent = 'Please provide a search query.';
+    loading.style.display = 'none';
+    return;
+  }
+
+  try {
+    loading.style.display = 'block';  // Show loading state
+
+    const res = await fetch(`http://localhost:5000/api/farmer/products?query=${query}`);
+    
+    if (!res.ok) {
+      throw new Error('Failed to fetch products');
+    }
+
+    // Now parse the JSON response after checking it's successful
+    // const products = await res.json();  // <-- This line is critical for parsing the response
+    products = await res.json();
+    console.log('Fetched Products:', products);
+
+    if (products.length === 0) {
+      heading.textContent = `No sellers found for "${query}"`;
+      loading.style.display = 'none';  // Hide loading state
+      return;
+    }
+
+    heading.textContent = `Sellers offering "${query}":`;
+    container.innerHTML = '';
+
+    // Display each matching product
+    products.forEach(p => {
+      const imgPath = p.photos?.[0]
+        ? `http://localhost:5000/uploads/${p.photos[0]}`
+        : 'https://via.placeholder.com/300x180?text=No+Image';
+
+      const card = document.createElement('div');
+      card.className = 'product-card';
+      card.innerHTML = `
+        <img src="${imgPath}" alt="${p.product}" />
+        <div class="info">
+          <h3>${p.product}</h3>
+    <p><strong>Seller:</strong> 
+  ${p.sellerId?.name?.first || ''} 
+  ${p.sellerId?.name?.middle || ''} 
+  ${p.sellerId?.name?.last || ''}
+</p>
+    <p><strong>Price:</strong> ₹${p.price}</p>
+    <p><strong>Minimum Order Quantity:</strong> ${p.minOrderQty}</p>
+   <p><strong>Address:</strong> 
+  ${p.sellerId?.address?.street || ''} 
+  ${p.sellerId?.address?.state || ''} 
+  ${p.sellerId?.address?.city|| ''}
+</p>
+    <p><strong>Contact No:</strong> ${p.sellerId?.mobile}</p>
+
+        </div>
+      `;
+      container.appendChild(card);
+    });
+ //--new line--//
+    addCardClickEvents();
+
+    loading.style.display = 'none';  // Hide loading state
+  } catch (error) {
+    console.error('Failed to fetch products:', error);
+    heading.textContent = 'Error loading products.';
+    loading.style.display = 'none';  // Hide loading state
+  }
+}
+
+fetchAndDisplayProducts();
+
+//---new lines for popup modal --//
+
+const modal = document.getElementById('productModal');
+const modalBody = document.getElementById('modalBody');
+const closeModal = document.getElementById('closeModal');
+const addToCartBtn = document.getElementById('addToCartBtn');
+
+let currentProduct = null;  // To store clicked product info
+
+// Function to open modal with product details
+function openModal(product) {
+  currentProduct = product;
+
+  const imgPath = product.photos?.[0]
+    ? `http://localhost:5000/uploads/${product.photos[0]}`
+    : 'https://via.placeholder.com/300x180?text=No+Image';
+
+  modalBody.innerHTML = `
+    <img src="${imgPath}" alt="${product.product}" style="width:100%; border-radius: 8px; margin-bottom: 10px;" />
+    <h2>${product.product}</h2>
+    <p><strong>Seller:</strong> ${product.sellerId?.name?.first || ''} ${product.sellerId?.name?.middle || ''} ${product.sellerId?.name?.last || ''}</p>
+    <p><strong>Price:</strong> ₹${product.price}</p>
+    <p><strong>Minimum Order Quantity:</strong> ${product.minOrderQty}</p>
+    <p><strong>Address:</strong> ${product.sellerId?.address?.street || ''}, ${product.sellerId?.address?.city || ''}, ${product.sellerId?.address?.state || ''}</p>
+    <p><strong>Contact No:</strong> ${product.sellerId?.mobile}</p>
+  `;
+
+  modal.style.display = 'flex';
+}
+
+// Close modal when clicking on close button
+closeModal.onclick = () => {
+  modal.style.display = 'none';
+};
+
+// Close modal when clicking outside modal content
+window.onclick = (event) => {
+  if (event.target === modal) {
+    modal.style.display = 'none';
+  }
+};
+
+// Add event listener to each product card after they're created
+function addCardClickEvents() {
+  const cards = document.querySelectorAll('.product-card');
+  cards.forEach((card, index) => {
+    card.addEventListener('click', () => {
+      openModal(products[index]);
+    });
+  });
+}
+
+// Add to Cart functionality (simple version using localStorage)
+addToCartBtn.onclick = () => {
+  if (!currentProduct) return;
+
+  // Get existing cart or empty array
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  // Check if product already in cart
+  const exists = cart.find(item => item._id === currentProduct._id);
+  if (exists) {
+    alert('Product already in cart');
+  } else {
+    cart.push(currentProduct);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert('Added to cart!');
+  }
+  modal.style.display = 'none';
+};
+// addCardClickEvents();
+
+  </script>
+  
+</body>
+</html>

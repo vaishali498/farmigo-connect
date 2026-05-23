@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+      background-image: url('userLogin.png'); /* Optional */
+      background-size: cover;
+    }
+    .container {
+      max-width: 400px;
+      margin: 100px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      background-color: #2ecc71;
+      color: white;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+        background-color: #27ae60;
+        transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Login</h2>
+  <form id="loginForm">
+    <label for="role">Select Role:</label>
+    <select id="role" required>
+      <option value="">-- Select Role --</option>
+      <option value="seller">Seller</option>
+      <option value="buyer">Buyer</option>
+    </select>
+
+    <label for="emailOrMobile">Email or Mobile Number:</label>
+    <input type="text" id="emailOrMobile" required>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" required>
+
+    <button type="submit">Login</button>
+  </form>
+</div>
+
+<script>
+  document.getElementById("loginForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+  
+    const role = document.getElementById("role").value;
+    const emailOrMobile = document.getElementById("emailOrMobile").value.trim();
+    const password = document.getElementById("password").value;
+  
+    if (!emailOrMobile || !password || !role) {
+      alert('Please fill all fields.');
+      return;
+    }
+  
+    const data = {
+      role,
+      emailOrMobile,
+      password
+    };
+  
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+         credentials: 'include',  // Important for sessions/cookies
+        // body: JSON.stringify(data)
+         body: JSON.stringify({ role, emailOrMobile, password })
+        
+      });
+  
+      const result = await response.json();
+      console.log("Login Response:", result);
+  
+      if (response.ok) {
+        alert("Login Successful! ✅");
+
+        fetch('http://localhost:5000/api/check-session', {
+        credentials: 'include'
+      })
+        .then(res => res.json())
+        .then(data => {
+          console.log('🟢 Session Check:', data);  // ✅ Check if session data exists
+        });
+
+  
+        // Redirect based on user role
+        if (role === "seller") {
+          window.location.href = "finalseller.html";
+        } else if (role === "buyer") {
+          window.location.href = "finalbuyer.html";
+        } else {
+          alert("Invalid role specified.");
+        }
+  
+      } else {
+        alert(result.message || "Login Failed ❌");
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Login Error ❌');
+    }
+  });
+  </script>
+  
+
+</body>
+</html>

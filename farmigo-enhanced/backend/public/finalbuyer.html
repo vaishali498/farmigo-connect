@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Buyer Dashboard | Farmigo</title>
+  <link rel="stylesheet" href="finalbuyer.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="nav-left">
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    <a href="Home.html" class="nav-logo">🌾 Farmigo</a>
+  </div>
+  <div class="nav-search" id="navSearch">
+    <input type="text" id="searchInput" placeholder="Search products (e.g., Tomato, Rice...)"/>
+    <button onclick="searchProducts()">🔍</button>
+  </div>
+  <div class="nav-right" id="navRight">
+    <button onclick="showTab('products')" class="nav-tab-btn active" id="tabBtnProducts">🛒 Products</button>
+    <button onclick="showTab('orders')" class="nav-tab-btn" id="tabBtnOrders">📦 My Orders</button>
+    <button onclick="showTab('chat')" class="nav-tab-btn" id="tabBtnChat">💬 Chat</button>
+    <button onclick="logout()" class="logout-btn">Logout</button>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu hidden" id="mobileMenu">
+  <button onclick="showTab('products'); closeMobile()">🛒 Products</button>
+  <button onclick="showTab('orders'); closeMobile()">📦 My Orders</button>
+  <button onclick="showTab('chat'); closeMobile()">💬 Chat</button>
+  <button onclick="logout()">🚪 Logout</button>
+</div>
+
+<!-- PRODUCTS TAB -->
+<div id="tabProducts">
+  <div class="container">
+    <aside class="sidebar" id="sidebar">
+      <h2>Categories</h2>
+      <ul id="categoryList"></ul>
+      <hr style="margin:16px 0; border:none; border-top:1px solid #ddd">
+      <h2>Filter</h2>
+      <div class="filter-group">
+        <label>Price (max ₹/kg)</label>
+        <input type="number" id="maxPrice" placeholder="e.g. 100" min="0"/>
+      </div>
+      <div class="filter-group">
+        <label>Sort by</label>
+        <select id="sortBy">
+          <option value="">Default</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="newest">Newest First</option>
+        </select>
+      </div>
+      <button class="filter-btn" onclick="applyFilters()">Apply Filters</button>
+      <button class="clear-btn" onclick="clearFilters()">Clear</button>
+    </aside>
+
+    <main class="main-content">
+      <div class="main-header">
+        <h1 id="selectedCategoryTitle">All Products</h1>
+        <button class="filter-toggle" onclick="toggleSidebar()">☰ Filter</button>
+      </div>
+      <div id="loadingProducts" class="loading">Loading products...</div>
+      <div class="product-grid" id="productGrid"></div>
+      <p id="noProducts" class="no-results hidden">No products found. Try a different search.</p>
+    </main>
+  </div>
+</div>
+
+<!-- ORDERS TAB -->
+<div id="tabOrders" class="hidden">
+  <div class="orders-container">
+    <h2>📦 My Orders</h2>
+    <div id="loadingOrders" class="loading">Loading orders...</div>
+    <div id="ordersList"></div>
+    <p id="noOrders" class="no-results hidden">No orders placed yet. Start shopping!</p>
+  </div>
+</div>
+
+<!-- CHAT TAB -->
+<div id="tabChat" class="hidden">
+  <div class="chat-container">
+    <h2>💬 Chat with Sellers</h2>
+    <p class="chat-info">Click on any product's "Chat" button to start a conversation with the seller.</p>
+    <div id="chatArea" class="chat-area hidden">
+      <div class="chat-header">
+        <span id="chatTitle">Chat</span>
+        <button onclick="closeChat()">✕</button>
+      </div>
+      <div id="chatMessages" class="chat-messages"></div>
+      <div class="chat-input-row">
+        <input type="text" id="chatInput" placeholder="Type a message..."/>
+        <button onclick="sendChatMsg()">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Order Modal -->
+<div class="modal" id="orderModal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeOrderModal()">×</span>
+    <h2>🛒 Place Order</h2>
+    <div id="orderProductInfo" class="order-product-info"></div>
+    <div class="form-group">
+      <label>Quantity</label>
+      <input type="number" id="orderQty" min="1" value="1"/>
+    </div>
+    <div class="form-group">
+      <label>Delivery Address</label>
+      <textarea id="orderAddress" rows="3" placeholder="Enter your full delivery address..."></textarea>
+    </div>
+    <div id="orderTotal" class="order-total"></div>
+    <button onclick="submitOrder()" class="order-submit-btn">Confirm Order</button>
+  </div>
+</div>
+
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+<script src="finalbuyer.js"></script>
+</body>
+</html>

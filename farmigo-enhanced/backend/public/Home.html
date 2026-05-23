@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home | Farmigo</title>
+  <link rel="stylesheet" href="Home.css"/>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar">
+  <div class="nav-brand">
+    <span class="nav-logo">🌾 Farmigo</span>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home" class="nav-link active">Home</a></li>
+    <li><a href="#services" class="nav-link">Services</a></li>
+    <li><a href="#about" class="nav-link">About</a></li>
+    <li><a href="#weather" class="nav-link">Weather</a></li>
+    <li><a href="#contact" class="nav-link">Contact</a></li>
+    <li><a href="login.html" class="nav-btn">Login / Register</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section id="home" class="hero">
+  <div class="hero-content">
+    <h1>Welcome to <span class="highlight">Farmigo</span></h1>
+    <p>A digital transformation in agriculture. We connect farmers directly to buyers — eliminating middlemen, ensuring fair prices, and bringing fresh produce to your fingertips.</p>
+    <div class="hero-btns">
+      <a href="login.html" class="btn-primary">Get Started</a>
+      <a href="#services" class="btn-outline">Learn More</a>
+    </div>
+  </div>
+  <div class="hero-img-wrap">
+    <img src="hero.jpg" alt="Fresh Vegetables" class="hero-img"/>
+  </div>
+</section>
+
+<!-- Stats Bar -->
+<div class="stats-bar">
+  <div class="stat"><span class="stat-num">500+</span><span>Farmers</span></div>
+  <div class="stat"><span class="stat-num">1200+</span><span>Products</span></div>
+  <div class="stat"><span class="stat-num">3000+</span><span>Buyers</span></div>
+  <div class="stat"><span class="stat-num">100%</span><span>Fresh</span></div>
+</div>
+
+<!-- Services Section -->
+<section id="services" class="services">
+  <h2>Our Services</h2>
+  <p class="section-subtitle">Everything you need from farm to table</p>
+  <div class="service-cards">
+    <div class="card">
+      <div class="card-icon">🤝</div>
+      <img src="istockphoto-1098289506-612x612.webp" alt="Farmer to Buyer" class="service-image">
+      <h3>Direct Farmer-to-Buyer</h3>
+      <p>Connect farmers and consumers directly, eliminating middlemen and ensuring fair pricing.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🥬</div>
+      <img src="photo-1730991709958-8debfc077091.avif" alt="Fresh Produce" class="service-image">
+      <h3>Fresh Produce Listings</h3>
+      <p>Real-time listing of vegetables, fruits, and grains available straight from the farms.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🚚</div>
+      <img src="photo-1625642550931-0d9fc141ef98.avif" alt="Logistics" class="service-image">
+      <h3>Logistics Support</h3>
+      <p>Integrated delivery services to ensure timely and fresh delivery to customers.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📊</div>
+      <div class="card-icon-big">📈</div>
+      <h3>Farmer Dashboard</h3>
+      <p>Track your sales, manage inventory, and view analytics — all from your phone.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon-big">💬</div>
+      <h3>Live Chat</h3>
+      <p>Buyers and sellers can chat in real-time to negotiate and confirm orders easily.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon-big">📦</div>
+      <h3>Order Tracking</h3>
+      <p>Track every order from placement to delivery with live status updates.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Weather Section -->
+<section id="weather" class="weather-section">
+  <h2>🌤️ Farm Weather</h2>
+  <p class="section-subtitle">Check the weather before planning your harvest or delivery</p>
+  <div class="weather-box">
+    <div class="weather-search">
+      <input type="text" id="cityInput" placeholder="Enter city name (e.g., Mau, Lucknow)" />
+      <button onclick="getWeather()" id="weatherBtn">Get Weather</button>
+    </div>
+    <div id="weatherResult" class="weather-result hidden">
+      <div class="weather-card">
+        <div class="weather-main">
+          <span id="weatherIcon" class="weather-icon">☀️</span>
+          <div>
+            <h3 id="weatherCity">City</h3>
+            <p id="weatherDesc">Description</p>
+          </div>
+        </div>
+        <div class="weather-details">
+          <div class="weather-detail"><span>🌡️</span><strong id="weatherTemp">--</strong><small>Temperature</small></div>
+          <div class="weather-detail"><span>💧</span><strong id="weatherHumidity">--</strong><small>Humidity</small></div>
+          <div class="weather-detail"><span>💨</span><strong id="weatherWind">--</strong><small>Wind</small></div>
+          <div class="weather-detail"><span>👁️</span><strong id="weatherFeels">--</strong><small>Feels like</small></div>
+        </div>
+        <div id="farmingTip" class="farming-tip"></div>
+      </div>
+    </div>
+    <div id="weatherError" class="weather-error hidden"></div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="about">
+  <div class="about-content">
+    <div class="about-text">
+      <h2>About Us</h2>
+      <p>Farmigo was born from a vision to create a more equitable ecosystem for Indian farmers. Despite their critical role in our economy, many farmers still face challenges in accessing fair markets and digital tools.</p>
+      <p>Built with modern web technologies, Farmigo is more than just an online store. It is a community-driven initiative focused on rural upliftment, traceability of produce, and promoting ethical food consumption.</p>
+      <!-- <p>As a college major project, Farmigo represents the potential of technology in social development — combining software engineering with real-world impact.</p> -->
+    </div>
+    <div class="about-img">
+      <img src="indexphoto.png" alt="About Farmigo" onerror="this.style.display='none'"/>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="contact">
+  <h2>Contact Us</h2>
+  <div class="contact-grid">
+    <div class="contact-item"><span>📧</span><p>support@farmigo.com</p></div>
+    <div class="contact-item"><span>📞</span><p>+91-99999-99999</p></div>
+    <div class="contact-item"><span>📍</span><p>Uttar Pradesh, India</p></div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>© 2025 Farmigo — Empowering Farmers, Enriching Lives 🌾</p>
+</footer>
+
+<script src="Home.js"></script>
+</body>
+</html>
