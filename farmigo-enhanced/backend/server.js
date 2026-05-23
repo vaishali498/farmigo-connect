@@ -23,8 +23,9 @@ const io = new Server(server, {
 });
 
 // CORS
+
 app.use(cors({
-  origin: true,
+  origin: 'https://farmigo-connect.vercel.app',
   credentials: true
 }));
 
