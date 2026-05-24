@@ -92,3 +92,10 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/farmersMark
 
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Keep Server Alive
+const https = require('https');
+setInterval(() => {
+  https.get('https://farmigo-backend-5w4i.onrender.com', (res) => {
+    console.log('Server alive:', res.statusCode);
+  }).on('error', () => {});
+}, 14 * 60 * 1000);
