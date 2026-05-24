@@ -3,7 +3,9 @@
 A digital platform connecting farmers directly to buyers — eliminating middlemen, ensuring fair prices, and bringing fresh produce to everyone.
 
 🚀 Live URLs
-ServiceURL🌐 Frontendhttps://farmigo-connect.vercel.app⚙️ Backend APIhttps://farmigo-backend-5w4i.onrender.com🗄️ DatabaseMongoDB Atlas (Cloud)
+ServiceURL🌐 Frontendhttps://farmigo-connect.vercel.app
+⚙️ Backend APIhttps://farmigo-backend-5w4i.onrender.com
+🗄️ DatabaseMongoDB Atlas (Cloud)
 
 📌 About The Project
 Farmigo Connect is a full-stack web application built as a college major project. It digitally transforms the agricultural supply chain by:
