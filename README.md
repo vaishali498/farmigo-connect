@@ -26,7 +26,7 @@ Feature Description
 🚪 LogoutSecure session-based logout
 
 # 🛠️ Tech Stack:
-** Frontend
+**Frontend
 ** HTML5
 ** CSS3 (Responsive with Media Queries)
 # JavaScript (Vanilla)
