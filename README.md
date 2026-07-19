@@ -1,13 +1,13 @@
-🌾 Farmigo Connect — Farmers Marketplace
+# 🌾 Farmigo Connect — Farmers Marketplace
 
 A digital platform connecting farmers directly to buyers — eliminating middlemen, ensuring fair prices, and bringing fresh produce to everyone.
 
-🚀 Live URLs
+# 🚀 Live URLs
 ServiceURL🌐 Frontendhttps://farmigo-connect.vercel.app
 ⚙️ Backend APIhttps://farmigo-backend-5w4i.onrender.com
 🗄️ DatabaseMongoDB Atlas (Cloud)
 
-📌 About The Project
+# 📌 About The Project
 Farmigo Connect is a full-stack web application built as a college major project. It digitally transforms the agricultural supply chain by:
 
 Allowing farmers (sellers) to list their produce directly online
@@ -15,13 +15,20 @@ Allowing buyers to browse, search, and purchase fresh farm products
 Providing real-time communication between farmers and buyers
 Giving farmers a dashboard to track their sales and analytics
 
-✨ Features
-FeatureDescription📱 Responsive DesignWorks on mobile, tablet, and desktop🌤️ Weather WidgetReal-time weather for farmers (no API key needed)🔍 Search & FilterSearch products by name, filter by category and price📦 Order TrackingPlace orders and track status in real-time📊 Farmer DashboardSales analytics with charts and stats💬 Real-time ChatLive chat between buyer and seller via Socket.io🔐 AuthenticationSeparate login/register for Farmers and Buyers🚪 LogoutSecure session-based logout
+# ✨ Features
+Feature Description
+📱 Responsive DesignWorks on mobile, tablet, and desktop
+🌤️ Weather WidgetReal-time weather for farmers (no API key needed)🔍 Search & FilterSearch products by name, filter by category and price
+📦 Order TrackingPlace orders and track status in real-time
+📊 Farmer DashboardSales analytics with charts and stats
+💬 Real-time ChatLive chat between buyer and seller via Socket.io
+🔐 AuthenticationSeparate login/register for Farmers and Buyers
+🚪 LogoutSecure session-based logout
 
-🛠️ Tech Stack:
-# Frontend
-# HTML5
-# CSS3 (Responsive with Media Queries)
+# 🛠️ Tech Stack:
+** Frontend
+** HTML5
+** CSS3 (Responsive with Media Queries)
 # JavaScript (Vanilla)
 # Socket.io Client
 # Chart.js (Dashboard charts)
