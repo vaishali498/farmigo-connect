@@ -18,33 +18,33 @@ Giving farmers a dashboard to track their sales and analytics
 ✨ Features
 FeatureDescription📱 Responsive DesignWorks on mobile, tablet, and desktop🌤️ Weather WidgetReal-time weather for farmers (no API key needed)🔍 Search & FilterSearch products by name, filter by category and price📦 Order TrackingPlace orders and track status in real-time📊 Farmer DashboardSales analytics with charts and stats💬 Real-time ChatLive chat between buyer and seller via Socket.io🔐 AuthenticationSeparate login/register for Farmers and Buyers🚪 LogoutSecure session-based logout
 
-🛠️ Tech Stack
-Frontend
-HTML5
-CSS3 (Responsive with Media Queries)
-JavaScript (Vanilla)
-Socket.io Client
-Chart.js (Dashboard charts)
+🛠️ Tech Stack:
+# Frontend
+# HTML5
+# CSS3 (Responsive with Media Queries)
+# JavaScript (Vanilla)
+# Socket.io Client
+# Chart.js (Dashboard charts)
 
 Backend
 
-Node.js
-Express.js
-Socket.io (Real-time chat)
-Multer (Image uploads)
-Express-Session (Authentication)
-dotenv
+# Node.js
+# Express.js
+# Socket.io (Real-time chat)
+# Multer (Image uploads)
+# Express-Session (Authentication)
+# dotenv
 
 Database
 
-MongoDB (Local development)
-MongoDB Atlas (Production/Cloud)
+# MongoDB (Local development)
+# MongoDB Atlas (Production/Cloud)
 
 Deployment
 
-Frontend → Vercel
-Backend → Render
-Database → MongoDB Atlas
+# Frontend → Vercel
+# Backend → Render
+# Database → MongoDB Atlas
 
 
 📁 Project Structure
