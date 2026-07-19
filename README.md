@@ -3,7 +3,8 @@
 A digital platform connecting farmers directly to buyers — eliminating middlemen, ensuring fair prices, and bringing fresh produce to everyone.
 
 # 🚀 Live URLs
-ServiceURL🌐 Frontendhttps://farmigo-connect.vercel.app
+Service URL
+. 🌐 Frontendhttps://farmigo-connect.vercel.app
 ⚙️ Backend APIhttps://farmigo-backend-5w4i.onrender.com
 🗄️ DatabaseMongoDB Atlas (Cloud)
 
@@ -26,32 +27,32 @@ Feature Description
 🚪 LogoutSecure session-based logout
 
 # 🛠️ Tech Stack:
-**Frontend
-** HTML5
-** CSS3 (Responsive with Media Queries)
-# JavaScript (Vanilla)
-# Socket.io Client
-# Chart.js (Dashboard charts)
+Frontend
+HTML5
+CSS3 (Responsive with Media Queries)
+JavaScript (Vanilla)
+Socket.io Client
+Chart.js (Dashboard charts)
 
 Backend
 
-# Node.js
-# Express.js
-# Socket.io (Real-time chat)
-# Multer (Image uploads)
-# Express-Session (Authentication)
-# dotenv
+ Node.js
+ Express.js
+ Socket.io (Real-time chat)
+ Multer (Image uploads)
+ Express-Session (Authentication)
+ dotenv
 
-Database
+# Database
 
-# MongoDB (Local development)
-# MongoDB Atlas (Production/Cloud)
+MongoDB (Local development)
+MongoDB Atlas (Production/Cloud)
 
-Deployment
+# Deployment
 
-# Frontend → Vercel
-# Backend → Render
-# Database → MongoDB Atlas
+Frontend → Vercel
+Backend → Render
+Database → MongoDB Atlas
 
 
 📁 Project Structure
@@ -97,7 +98,7 @@ farmigo-connect/
       ├── DEPLOY_GUIDE.md           ← Deployment instructions
       └── README.md                 ← This file
 
-⚙️ API Endpoints
+# ⚙️ API Endpoints
 Auth Routes /api/auth
 MethodEndpointDescriptionPOST/registerRegister new user (seller/buyer)POST/loginLogin userPOST/logoutLogout userGET/buyer/check-sessionCheck buyer sessionGET/seller/check-sessionCheck seller session
 Product Routes /api/farmer
@@ -105,7 +106,7 @@ MethodEndpointDescriptionGET/productsGet all productsPOST/productsAdd new produc
 Order Routes /api/orders
 MethodEndpointDescriptionPOST/placePlace new orderGET/my-ordersGet buyer's ordersGET/seller-ordersGet seller's received ordersPUT/update-status/:idUpdate order status (seller)GET/dashboard-statsGet seller dashboard stats
 
-🏃 Run Locally
+# 🏃 Run Locally
 Prerequisites
 
 Node.js v18+
